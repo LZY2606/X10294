@@ -1,0 +1,7 @@
+{
+  "channels": [
+    {"channelId": "CH-A", "bitOrder": "NORMAL", "nominalRateHz": 100.0, "rateTolerancePct": 20.0, "gapFactor": 3.0, "unit": "ms"},
+    {"channelId": "CH-B", "bitOrder": "NORMAL", "nominalRateHz": 50.0, "rateTolerancePct": 20.0, "gapFactor": 3.0, "unit": "ms"},
+    {"channelId": "CH-REV", "bitOrder": "REVERSED", "nominalRateHz": 100.0, "rateTolerancePct": 20.0, "gapFactor": 3.0, "unit": "ms"}
+  ]
+}

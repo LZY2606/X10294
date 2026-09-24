@@ -1,0 +1,25 @@
+{
+  "dictVersion": "dict-v1",
+  "note": "原位序列、接收时间、通道、奇偶结果、label、SDI、SSM、数据域和字典版本均保留；raw 为导入时的原始十六进制表示，派生层才做规范化。",
+  "words": [
+    {"seq": 1,  "rxTimeMs": 0,   "channel": "CH-A",   "raw": "600FA0A1"},
+    {"seq": 2,  "rxTimeMs": 10,  "channel": "CH-A",   "raw": "7FED40A1"},
+    {"seq": 3,  "rxTimeMs": 20,  "channel": "CH-A",   "raw": "E01130A1"},
+    {"seq": 4,  "rxTimeMs": 30,  "channel": "CH-A",   "raw": "601068A1"},
+    {"seq": 5,  "rxTimeMs": 40,  "channel": "CH-A",   "raw": "600F78A1"},
+    {"seq": 6,  "rxTimeMs": 80,  "channel": "CH-A",   "raw": "E00FC8A1"},
+    {"seq": 7,  "rxTimeMs": 120, "channel": "CH-A",   "raw": "600F50A1"},
+    {"seq": 8,  "rxTimeMs": 160, "channel": "CH-A",   "raw": "600FF0A1"},
+    {"seq": 9,  "rxTimeMs": 860, "channel": "CH-A",   "raw": "600FB4A1"},
+    {"seq": 10, "rxTimeMs": 870, "channel": "CH-A",   "raw": "E00F8CA1"},
+    {"seq": 11, "rxTimeMs": 880, "channel": "CH-A",   "raw": "E00FDCA1"},
+    {"seq": 12, "rxTimeMs": 0,   "channel": "CH-B",   "raw": "E0032083"},
+    {"seq": 13, "rxTimeMs": 20,  "channel": "CH-B",   "raw": "6048D005"},
+    {"seq": 14, "rxTimeMs": 40,  "channel": "CH-B",   "raw": "E0037083"},
+    {"seq": 15, "rxTimeMs": 60,  "channel": "CH-B",   "raw": "E04AD005"},
+    {"seq": 16, "rxTimeMs": 80,  "channel": "CH-B",   "raw": "80034083"},
+    {"seq": 17, "rxTimeMs": 100, "channel": "CH-B",   "raw": "E048D805"},
+    {"seq": 18, "rxTimeMs": 5,   "channel": "CH-REV", "raw": "FF280007"},
+    {"seq": 19, "rxTimeMs": 15,  "channel": "CH-REV", "raw": "FF280007"}
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "dictVersion": "dict-v2",
+  "entries": [
+    {"labelOctal": "205", "mnemonic": "ALT_FT", "encoding": "BNR", "unit": "ft", "resolution": 1.0, "bits": 19},
+    {"labelOctal": "301", "mnemonic": "AOA_FLAG", "encoding": "DISCRETE", "unit": "flags",
+     "bitNames": {"11": "VANE_LEFT", "12": "VANE_RIGHT", "13": "HEATER_ON"}},
+    {"labelOctal": "240", "mnemonic": "DATE_BCD", "encoding": "BCD", "unit": "date", "digits": 4, "decimalPlaces": 0},
+    {"labelOctal": "377", "mnemonic": "MODE_DISC", "encoding": "DISCRETE", "unit": "flags",
+     "bitNames": {"11": "WOW", "12": "REVERSER", "13": "AUTOPILOT"}}
+  ]
+}

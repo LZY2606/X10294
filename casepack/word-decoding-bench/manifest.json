@@ -1,0 +1,12 @@
+{
+  "caseId": "word-decoding-bench",
+  "title": "字路译码台：ARINC 429 标签、奇偶与速率分段证据",
+  "version": 1,
+  "files": {
+    "channels": "channels.json",
+    "dictionaries": ["dict-v1.json", "dict-v2.json"],
+    "words": "words-baseline.json",
+    "scenario": "scenario.json",
+    "exportBaseline": "export-baseline.json"
+  }
+}

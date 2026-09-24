@@ -1,0 +1,37 @@
+{
+  "title": "反例档案重放：位序反转、奇偶错误、八进制 label、BNR 负值、BCD 非法数字、速率切换、SSM 无效状态",
+  "steps": [
+    {"id": "S1", "kind": "assert-baseline",
+     "expect": {
+       "wordCount": 19,
+       "badParityWordSeqs": [3],
+       "bcdInvalidWordSeqs": [15],
+       "ssmInvalidWordSeqs": [16],
+       "bnrNegativeWordSeqs": [2],
+       "reversedChannel": "CH-REV",
+       "octalLabelDemo": {"wordSeq": 1, "labelOctal": "205"}
+     }},
+    {"id": "S2", "kind": "param-revision",
+     "desc": "字典参数修订 dict-v1 -> dict-v2：label 301 由 BNR 改为 DISCRETE，失效范围只覆盖 label=301 的解释",
+     "dictVersion": "dict-v2",
+     "expectInvalidation": {"labels": ["301"], "channels": ["CH-B"]}},
+    {"id": "S3", "kind": "source-patch",
+     "desc": "只影响局部依赖的源数据改动：CH-REV 记录位序由 REVERSED 改为 NORMAL",
+     "channel": "CH-REV", "bitOrder": "NORMAL",
+     "expectInvalidation": {"channels": ["CH-REV"]}},
+    {"id": "S4", "kind": "rate-adjudication",
+     "desc": "CH-A 速率切换 + 采集缺口：保留分段候选，采纳三段候选、否定合并候选",
+     "channel": "CH-A", "acceptCandidate": "SEG3", "rejectCandidate": "SEG2"},
+    {"id": "S5", "kind": "conflicting-decisions",
+     "desc": "互相冲突的人工决定：先接受 seq=16 的 SSM 无效字进入人工复核通过，再否定该决定",
+     "wordSeq": 16, "first": "ACCEPT", "then": "REJECT"},
+    {"id": "S6", "kind": "criterion-events",
+     "desc": "机器可读取判断依据事件",
+     "criteria": [
+       "label 的八进制展示不改变底层位",
+       "BNR/BCD/discrete 解释由字典版本决定",
+       "速率变化与采集缺口保留分段候选",
+       "坏奇偶字不进入聚合值"
+     ]}
+  ]
+}
