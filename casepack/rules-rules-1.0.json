@@ -1,0 +1,26 @@
+{
+  "version": "rules-1.0",
+  "rate_tolerance": 0.15,
+  "acquisition_gap_us": 20000,
+  "ssm_table": {
+    "BNR": {
+      "0": "NO (normal operation)",
+      "1": "NCD (no computed data)",
+      "2": "FT (functional test)",
+      "3": "FW (failure warning)"
+    },
+    "BCD": {
+      "3": "NO (normal operation)",
+      "0": "NCD (no computed data)",
+      "1": "FT (functional test)",
+      "2": "FW (failure warning)"
+    },
+    "DISCRETE": {
+      "3": "NO (normal operation)",
+      "0": "NCD (no computed data)",
+      "1": "FT (functional test)",
+      "2": "FW (failure warning)"
+    }
+  },
+  "note": "15% jitter tolerance, gaps >=20 ms split segments"
+}

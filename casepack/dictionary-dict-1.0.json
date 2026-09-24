@@ -1,0 +1,41 @@
+{
+  "version": "dict-1.0",
+  "coord_datum": "all altitudes are feet above MSL",
+  "entries": [
+    {
+      "key": "203/00",
+      "label_octal": "203",
+      "sdi": "00",
+      "name": "Baro Altitude",
+      "encoding": "BNR",
+      "lsb_weight": 1.0,
+      "units": "ft MSL",
+      "note": "19-bit signed, 1 ft/count"
+    },
+    {
+      "key": "206/00",
+      "label_octal": "206",
+      "sdi": "00",
+      "name": "Indicated Airspeed",
+      "encoding": "BCD",
+      "bcd_digits": 3,
+      "units": "km/h",
+      "note": "three packed BCD digits, LSB digit first"
+    },
+    {
+      "key": "270/00",
+      "label_octal": "270",
+      "sdi": "00",
+      "name": "Landing Gear Status",
+      "encoding": "DISCRETE",
+      "discrete_bits": {
+        "1": "GEAR-UP",
+        "3": "GEAR-DOWN",
+        "7": "GEAR-BUS-FAULT",
+        "13": "GEAR-DOOR"
+      },
+      "units": "discrete",
+      "note": "data bit positions are 1-based"
+    }
+  ]
+}

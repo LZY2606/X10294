@@ -1,0 +1,13 @@
+[
+  {
+    "id": "ch-A",
+    "name": "Avionics Bus A",
+    "configured_bps": null,
+    "note": "configured rate withheld so the bench must infer it"
+  },
+  {
+    "id": "ch-B",
+    "name": "Avionics Bus B",
+    "configured_bps": null
+  }
+]

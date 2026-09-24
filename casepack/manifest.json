@@ -1,0 +1,366 @@
+{
+  "id": "arinc429-word-decoding-bench",
+  "title": "字路译码台：ARINC 429 标签、奇偶与速率分段证据",
+  "domain": "ARINC 429",
+  "casepack_version": "1.0.0",
+  "narrative": [
+    "航电数据小组导入时间戳与32位原始字、通道配置和标签字典；",
+    "审阅字序、速率分段和工程值解释，所有结论保留来源链。"
+  ],
+  "rules": [
+    "label 的八进制展示不改变底层位",
+    "BNR/BCD/discrete 解释由字典版本决定",
+    "速率变化与采集缺口保留分段候选",
+    "坏奇偶字不进入聚合值",
+    "无法唯一决定时保留全部合法候选"
+  ],
+  "words": [
+    {
+      "id": "w-001",
+      "orig_index": "1",
+      "receive_time_us": "0",
+      "channel": "A",
+      "raw_text": "0x0012C0C1",
+      "role": "alt good +1200"
+    },
+    {
+      "id": "w-002",
+      "orig_index": "2",
+      "receive_time_us": "1000",
+      "channel": "B",
+      "raw_text": "0x003390C1",
+      "role": "B alt +9900"
+    },
+    {
+      "id": "w-003",
+      "orig_index": "3",
+      "receive_time_us": "2560",
+      "channel": "A",
+      "raw_text": "0x000C4861",
+      "role": "IAS 312"
+    },
+    {
+      "id": "w-004",
+      "orig_index": "4",
+      "receive_time_us": "3560",
+      "channel": "B",
+      "raw_text": "0x8000141D",
+      "role": "B discrete bits"
+    },
+    {
+      "id": "w-005",
+      "orig_index": "5",
+      "receive_time_us": "5120",
+      "channel": "A",
+      "raw_text": "0x901450C1",
+      "role": "ALT SSM=NCD excluded"
+    },
+    {
+      "id": "w-006",
+      "orig_index": "6",
+      "receive_time_us": "6120",
+      "channel": "B",
+      "raw_text": "0x3FFE70C1",
+      "role": "B ALT negative -300"
+    },
+    {
+      "id": "w-007",
+      "orig_index": "7",
+      "receive_time_us": "7680",
+      "channel": "A",
+      "raw_text": "0x0015E0C1",
+      "role": "alt good +1400"
+    },
+    {
+      "id": "w-008",
+      "orig_index": "8",
+      "receive_time_us": "8680",
+      "channel": "B",
+      "raw_text": "0x800C5461",
+      "role": "B IAS 315"
+    },
+    {
+      "id": "w-009",
+      "orig_index": "9",
+      "receive_time_us": "10240",
+      "channel": "A",
+      "raw_text": "0x0001001D",
+      "role": "discrete GEAR-DOWN"
+    },
+    {
+      "id": "w-010",
+      "orig_index": "10",
+      "receive_time_us": "11240",
+      "channel": "B",
+      "raw_text": "0x803520C1",
+      "role": "B alt good"
+    },
+    {
+      "id": "w-011",
+      "orig_index": "11",
+      "receive_time_us": "12800",
+      "channel": "A",
+      "raw_text": "0x801770C1",
+      "role": "alt good +1500"
+    },
+    {
+      "id": "w-012",
+      "orig_index": "12",
+      "receive_time_us": "13800",
+      "channel": "B",
+      "raw_text": "0xA000801D",
+      "role": "B discrete SSM=FW invalid"
+    },
+    {
+      "id": "w-013",
+      "orig_index": "13",
+      "receive_time_us": "15360",
+      "channel": "A",
+      "raw_text": "0x800C5461",
+      "role": "IAS 315"
+    },
+    {
+      "id": "w-014",
+      "orig_index": "14",
+      "receive_time_us": "35840",
+      "channel": "A",
+      "raw_text": "0x001B58C1",
+      "role": "ALT bad parity excluded"
+    },
+    {
+      "id": "w-015",
+      "orig_index": "15",
+      "receive_time_us": "38400",
+      "channel": "A",
+      "raw_text": "0x000CAC61",
+      "role": "IAS illegal BCD nibble retained"
+    },
+    {
+      "id": "w-016",
+      "orig_index": "16",
+      "receive_time_us": "40960",
+      "channel": "A",
+      "raw_text": "0x9FF8F8C1",
+      "role": "ALT negative -450"
+    },
+    {
+      "id": "w-017",
+      "orig_index": "17",
+      "receive_time_us": "543520",
+      "channel": "A",
+      "raw_text": "0x0020D0C1",
+      "role": "seg2 alt +2100"
+    },
+    {
+      "id": "w-018",
+      "orig_index": "18",
+      "receive_time_us": "544520",
+      "channel": "B",
+      "raw_text": "0x8039D0C1",
+      "role": "seg2 B alt"
+    },
+    {
+      "id": "w-019",
+      "orig_index": "19",
+      "receive_time_us": "543840",
+      "channel": "A",
+      "raw_text": "0x002260C1",
+      "role": "seg2 alt +2200"
+    },
+    {
+      "id": "w-020",
+      "orig_index": "20",
+      "receive_time_us": "544840",
+      "channel": "B",
+      "raw_text": "0x80000C1D",
+      "role": "seg2 B discrete"
+    },
+    {
+      "id": "w-021",
+      "orig_index": "21",
+      "receive_time_us": "544160",
+      "channel": "A",
+      "raw_text": "0x8023F0C1",
+      "role": "seg2 alt +2300"
+    },
+    {
+      "id": "w-022",
+      "orig_index": "22",
+      "receive_time_us": "545160",
+      "channel": "B",
+      "raw_text": "0x1FFCE0C1",
+      "role": "seg2 B ALT negative"
+    },
+    {
+      "id": "w-023",
+      "orig_index": "23",
+      "receive_time_us": "544480",
+      "channel": "A",
+      "raw_text": "0x800C8061",
+      "role": "seg2 IAS 320"
+    },
+    {
+      "id": "w-024",
+      "orig_index": "24",
+      "receive_time_us": "545480",
+      "channel": "B",
+      "raw_text": "0x800C8061",
+      "role": "seg2 B IAS 320"
+    }
+  ],
+  "mutations": [
+    {
+      "id": "M1-bit-order-reversal",
+      "kind": "reverse32",
+      "target_word": "w-001",
+      "changes": "raw32",
+      "label": "位序反转 (bit order reversal)",
+      "expected_scope": [
+        "decoded:w-001",
+        "aggregate:ch-A/203"
+      ]
+    },
+    {
+      "id": "M2-parity-error",
+      "kind": "flipParity",
+      "target_word": "w-013",
+      "changes": "parity bit",
+      "label": "奇偶错误 (bad parity)",
+      "expected_scope": [
+        "decoded:w-013",
+        "aggregate:ch-A/206"
+      ]
+    },
+    {
+      "id": "M3-octal-label-presentation",
+      "kind": "octalPresentation",
+      "target_word": "w-013",
+      "changes": "presentation only",
+      "label": "八进制 label 展示 (octal label presentation)",
+      "expected_scope": [],
+      "note": "displaying label as octal never mutates the underlying 32 bits"
+    },
+    {
+      "id": "M4-bnr-negative",
+      "kind": "sourceEdit",
+      "target_word": "w-019",
+      "raw_text": "0x1FF31CC1",
+      "changes": "BNR data field sign",
+      "label": "BNR 负值 (negative BNR)",
+      "expected_scope": [
+        "decoded:w-019",
+        "aggregate:ch-A/203"
+      ]
+    },
+    {
+      "id": "M5-bcd-illegal-digit",
+      "kind": "sourceEdit",
+      "target_word": "w-023",
+      "raw_text": "0x80127061",
+      "changes": "BCD low nibble -> 0xC",
+      "label": "BCD 非法数字 (illegal BCD digit)",
+      "expected_scope": [
+        "decoded:w-023",
+        "aggregate:ch-A/206"
+      ]
+    },
+    {
+      "id": "M6-rate-switch",
+      "kind": "sourceEdit",
+      "target_word": "w-019",
+      "receive_time_us": "544160",
+      "changes": "receive timestamp aligns with the 100 kbps cadence",
+      "label": "速率切换 (rate switch timing)",
+      "expected_scope": [
+        "rate:ch-A"
+      ]
+    },
+    {
+      "id": "M7-ssm-invalid",
+      "kind": "sourceEdit",
+      "target_word": "w-021",
+      "raw_text": "0xB023F0C1",
+      "changes": "SSM -> FW",
+      "label": "SSM 无效状态 (SSM failure warning)",
+      "expected_scope": [
+        "decoded:w-021",
+        "aggregate:ch-A/203"
+      ]
+    }
+  ],
+  "replay_stages": [
+    {
+      "stage": 1,
+      "name": "baseline-import",
+      "title": "导入基线并核对原位字段",
+      "action": {
+        "type": "import-casepack"
+      },
+      "assertions": [
+        "raw words preserve orig_index/receive_time_us/channel/raw_text",
+        "parity, label octal, SDI, SSM, data and dictionary version visible"
+      ]
+    },
+    {
+      "stage": 2,
+      "name": "parameter-revision",
+      "title": "规则参数修订 (rules-1.0 -> rules-2.0)",
+      "action": {
+        "type": "use-rule",
+        "version": "rules-2.0"
+      },
+      "assertions": [
+        "only rate analyses invalidate; decoded words untouched"
+      ]
+    },
+    {
+      "stage": 3,
+      "name": "local-source-edit",
+      "title": "只影响局部依赖的源数据改动",
+      "action": {
+        "type": "material-version",
+        "change": "flip parity of w-007",
+        "target_word": "w-007"
+      },
+      "assertions": [
+        "only decoded:w-007 and aggregate:ch-A/203 are invalidated",
+        "rate and other labels keep their conclusions"
+      ]
+    },
+    {
+      "stage": 4,
+      "name": "conflicting-decisions",
+      "title": "互相冲突的人工决定",
+      "action": {
+        "type": "conflict",
+        "object": "rate:ch-A",
+        "candidates": [
+          "12500",
+          "100000"
+        ]
+      },
+      "assertions": [
+        "second submit sees conflict and both diffs",
+        "undo restores the previous branch state"
+      ]
+    }
+  ],
+  "expectations": {
+    "channels": [
+      "ch-A",
+      "ch-B"
+    ],
+    "ch_a_segment_rates_bps": [
+      12500,
+      100000
+    ],
+    "acquisition_gap_min_us": 20000,
+    "baseline_counts": {
+      "words": 24,
+      "bad_parity": 1,
+      "illegal_bcd": 1,
+      "negative_bnr": 2,
+      "ssm_invalid_bnr": 1
+    }
+  }
+}
