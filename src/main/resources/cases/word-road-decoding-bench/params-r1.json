@@ -1,0 +1,7 @@
+{
+  "paramsId": "rate-segmentation",
+  "version": "r1",
+  "toleranceRatio": 0.15,
+  "gapFactor": 3.0,
+  "maxCandidates": 16
+}

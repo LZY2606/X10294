@@ -1,0 +1,147 @@
+{
+  "casePackId": "word-road-decoding-bench",
+  "title": "字路译码台：ARINC 429 标签、奇偶与速率分段证据",
+  "version": "1.0.0",
+  "sourceName": "avionics-data-team-bus-capture-A/B",
+  "channels": [
+    {
+      "channel": "A1",
+      "bus": "ARINC429-BUS-1",
+      "expectedLabels": [
+        "203",
+        "270"
+      ]
+    },
+    {
+      "channel": "B2",
+      "bus": "ARINC429-BUS-2",
+      "expectedLabels": [
+        "203",
+        "270",
+        "377"
+      ]
+    }
+  ],
+  "words": [
+    {
+      "seq": 1,
+      "tsNanos": 0,
+      "channel": "A1",
+      "word": "0xE40000C1",
+      "reversedCapture": false,
+      "note": "BNR +60 kt baseline"
+    },
+    {
+      "seq": 2,
+      "tsNanos": 320000,
+      "channel": "A1",
+      "word": "0x780000C1",
+      "reversedCapture": false,
+      "note": "BNR negative -120 kt"
+    },
+    {
+      "seq": 3,
+      "tsNanos": 640000,
+      "channel": "A1",
+      "word": "0x620000C1",
+      "reversedCapture": false,
+      "note": "parity error: excluded from aggregate"
+    },
+    {
+      "seq": 4,
+      "tsNanos": 960000,
+      "channel": "A1",
+      "word": "0x7E0000C1",
+      "reversedCapture": false,
+      "note": "BNR negative small"
+    },
+    {
+      "seq": 5,
+      "tsNanos": 1280000,
+      "channel": "A1",
+      "word": "0xE009181D",
+      "reversedCapture": false,
+      "note": "BCD 0123 m"
+    },
+    {
+      "seq": 6,
+      "tsNanos": 3840000,
+      "channel": "A1",
+      "word": "0xE002101D",
+      "reversedCapture": false,
+      "note": "BCD 0042 m, low speed begins"
+    },
+    {
+      "seq": 7,
+      "tsNanos": 6400000,
+      "channel": "A1",
+      "word": "0x6080281D",
+      "reversedCapture": false,
+      "note": "BCD 1005 m"
+    },
+    {
+      "seq": 8,
+      "tsNanos": 21760000,
+      "channel": "A1",
+      "word": "0xE080801D",
+      "reversedCapture": false,
+      "note": "after acquisition gap"
+    },
+    {
+      "seq": 9,
+      "tsNanos": 24320000,
+      "channel": "A1",
+      "word": "0x6080901D",
+      "reversedCapture": false,
+      "note": "after gap 2"
+    },
+    {
+      "seq": 10,
+      "tsNanos": 0,
+      "channel": "B2",
+      "word": "0xFF2AAAAF",
+      "reversedCapture": true,
+      "note": "discrete normal"
+    },
+    {
+      "seq": 11,
+      "tsNanos": 2560000,
+      "channel": "B2",
+      "word": "0xE095181D",
+      "reversedCapture": false,
+      "note": "illegal BCD digit A"
+    },
+    {
+      "seq": 12,
+      "tsNanos": 5120000,
+      "channel": "B2",
+      "word": "0x84CCCCC1",
+      "reversedCapture": false,
+      "note": "SSM failure warning"
+    },
+    {
+      "seq": 13,
+      "tsNanos": 7680000,
+      "channel": "B2",
+      "word": "0x24CCCCC1",
+      "reversedCapture": false,
+      "note": "SSM no computed data"
+    },
+    {
+      "seq": 14,
+      "tsNanos": 10240000,
+      "channel": "B2",
+      "word": "0x44CCCCC1",
+      "reversedCapture": false,
+      "note": "SSM functional test"
+    },
+    {
+      "seq": 15,
+      "tsNanos": 12800000,
+      "channel": "B2",
+      "word": "0xE4CCCCC1",
+      "reversedCapture": false,
+      "note": "normal, aggregates"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "casePackId": "word-road-decoding-bench",
+  "title": "字路译码台：ARINC 429 标签、奇偶与速率分段证据",
+  "caseFile": "case.json",
+  "dictionaries": ["dictionary-v1.json", "dictionary-v2.json"],
+  "params": ["params-r1.json", "params-r2.json"],
+  "initialDict": "v1",
+  "initialParams": "r1",
+  "revisedDict": "v2",
+  "revisedParams": "r2",
+  "narrative": [
+    "导入：航电数据小组提交时间戳、32位原始字、通道配置与标签字典。",
+    "基线核对：原位序列、接收时间、通道、奇偶结果、label、SDI、SSM、数据域与字典版本均保留。",
+    "反例：仅改动一个直接来源，检验位序反转/奇偶/八进制label/BNR负值/BCD非法/速率切换/SSM无效的影响边界。",
+    "分支：参数修订(r1->r2)、字典修订(v1->v2)、局部源改动与互相冲突的人工决定各自保留。",
+    "终核：位域、相邻字间隔、速率候选、工程值换算与字典命中来源全部可回读并可追溯。"
+  ],
+  "mutations": [
+    {"id": "M_BIT_REVERSAL", "kind": "BIT_REVERSAL", "seq": 10,
+     "expectDirect": ["w:word-10"], "note": "位序反转只影响该字字段解释与派生，不波及其它字"},
+    {"id": "M_PARITY_ERROR", "kind": "PARITY_ERROR", "seq": 3,
+     "expectDirect": ["w:word-3"], "note": "坏奇偶字不进入聚合值，但仍留在原位"},
+    {"id": "M_OCTAL_LABEL", "kind": "OCTAL_LABEL_PRESENTATION", "seq": 5,
+     "expectDirect": [], "note": "八进制展示不改变底层位，失效范围为空"},
+    {"id": "M_BNR_NEGATIVE", "kind": "BNR_NEGATIVE", "seq": 2,
+     "expectDirect": ["w:word-2"], "note": "负值解释限于该字与其聚合"},
+    {"id": "M_BCD_ILLEGAL", "kind": "BCD_ILLEGAL_DIGIT", "seq": 11,
+     "expectDirect": ["w:word-11"], "note": "非法数字留在原位并附诊断"},
+    {"id": "M_RATE_SWITCH", "kind": "RATE_SWITCH", "seq": 5,
+     "expectDirect": ["w:word-5"], "note": "速率分段候选随相邻间隔变化"},
+    {"id": "M_SSM_INVALID", "kind": "SSM_INVALID", "seq": 12,
+     "expectDirect": ["w:word-12"], "note": "SSM非正常值不聚合但保留"}
+  ]
+}

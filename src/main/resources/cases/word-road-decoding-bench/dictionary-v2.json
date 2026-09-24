@@ -1,0 +1,52 @@
+{
+  "dictId": "a429-lab-dict",
+  "version": "v2",
+  "defs": [
+    {
+      "labelOctal": "203",
+      "name": "AIRSPEED_KMH",
+      "encoding": "BNR",
+      "bnrBits": 17,
+      "fullScale": 400.0,
+      "unit": "km/h"
+    },
+    {
+      "labelOctal": "270",
+      "name": "ALTITUDE",
+      "encoding": "BCD",
+      "bnrBits": 0,
+      "fullScale": 0.0,
+      "unit": "m",
+      "discreteNames": []
+    },
+    {
+      "labelOctal": "377",
+      "name": "DISCRETE_STATUS",
+      "encoding": "DISCRETE",
+      "bnrBits": 0,
+      "fullScale": 0.0,
+      "unit": "bits",
+      "discreteNames": [
+        "D19",
+        "D18",
+        "D17",
+        "D16",
+        "D15",
+        "D14",
+        "D13",
+        "D12",
+        "D11",
+        "D10",
+        "D9",
+        "D8",
+        "D7",
+        "D6",
+        "D5",
+        "D4",
+        "D3",
+        "D2",
+        "D1"
+      ]
+    }
+  ]
+}
