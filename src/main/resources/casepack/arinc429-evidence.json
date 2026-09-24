@@ -1,0 +1,71 @@
+{
+  "caseId": "word-decoder-arinc429",
+  "title": "字路译码台：ARINC 429 标签、奇偶与速率分段证据",
+  "description": "航电数据小组离线案例包。基线完整保留原位序列、接收时间、通道、奇偶结果、label、SDI、SSM、数据域与字典版本；随后包含一次参数修订、一次只影响局部依赖的单源改动和一次互相冲突的人工决定。",
+  "dictionaries": [
+    {
+      "version": "dict-1.0",
+      "ssmRules": "CLASSIC",
+      "note": "初始字典：经典 SSM 语义；BCD 负号取自 SSM bit30。",
+      "labels": [
+        {"label": "203", "sdi": -1, "name": "Pitch Angle", "unit": "deg", "coordBase": "aircraft body axes, positive nose up", "encoding": "BNR", "msb": 29, "lsb": 11, "resolution": 0.0006866455, "discrete": []},
+        {"label": "240", "sdi": -1, "name": "Selected Altitude", "unit": "ft", "coordBase": "MSL", "encoding": "BCD", "msb": 29, "lsb": 11, "resolution": 1.0, "discrete": []},
+        {"label": "103", "sdi": -1, "name": "Discrete Word 103", "unit": "state", "coordBase": "", "encoding": "DISCRETE", "msb": 0, "lsb": 0, "resolution": 0.0,
+          "discrete": ["D0", "D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10", "D11", "D12", "D13", "D14", "D15", "D16", "D17", "D18"]}
+      ]
+    },
+    {
+      "version": "dict-2.0",
+      "ssmRules": "REVISED",
+      "note": "修订字典：BNR SSM=10 视为 hold 候选；BCD 负号不再取自 SSM。仅用于分支解释对比，不覆盖历史。",
+      "labels": [
+        {"label": "203", "sdi": -1, "name": "Pitch Angle (revised)", "unit": "deg", "coordBase": "aircraft body axes, positive nose up", "encoding": "BNR", "msb": 29, "lsb": 11, "resolution": 0.0006866455, "discrete": []},
+        {"label": "240", "sdi": -1, "name": "Selected Altitude (revised)", "unit": "ft", "coordBase": "MSL", "encoding": "BCD", "msb": 29, "lsb": 11, "resolution": 1.0, "discrete": []},
+        {"label": "103", "sdi": -1, "name": "Discrete Word 103 (revised)", "unit": "state", "coordBase": "", "encoding": "DISCRETE", "msb": 0, "lsb": 0, "resolution": 0.0,
+          "discrete": ["D0", "D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10", "D11", "D12", "D13", "D14", "D15", "D16", "D17", "D18"]}
+      ]
+    }
+  ],
+  "channels": [
+    {"channel": "A", "nominalKbps": 100.0, "scheduleSlotMs": 10.0, "polarity": "ODD"},
+    {"channel": "A-LOW", "nominalKbps": 12.5, "scheduleSlotMs": 80.0, "polarity": "ODD"}
+  ],
+  "material": {
+    "id": "capture-2026-09-19T08-15",
+    "dictionaryVersion": "dict-1.0",
+    "words": [
+      {"seq": 1,  "received": "2026-09-19T08:15:00.000+09:00", "epochMs": 0,      "channel": "A", "raw": "0x000CE4C1", "importParity": true,  "note": "label 203 BNR +2.5deg nominal"},
+      {"seq": 2,  "received": "2026-09-19T08:15:00.010+09:00", "epochMs": 10,     "channel": "A", "raw": "0x032E0CC1", "importParity": true,  "note": "label 203 BNR negative -37deg (two's complement)"},
+      {"seq": 3,  "received": "2026-09-19T08:15:00.020+09:00", "epochMs": 20,     "channel": "A", "raw": "0x400000C1", "importParity": false, "note": "label 203 SSM=11 failure warning with BAD parity"},
+      {"seq": 4,  "received": "2026-09-19T08:15:00.030+09:00", "epochMs": 30,     "channel": "A", "raw": "0x800000C1", "importParity": true,  "note": "label 203 SSM=10 no computed data (NCD), parity good"},
+      {"seq": 5,  "received": "2026-09-19T08:15:00.040+09:00", "epochMs": 40,     "channel": "A", "raw": "0x0A864205", "importParity": true,  "note": "label 240 BCD altitude digits"},
+      {"seq": 6,  "received": "2026-09-19T08:15:00.050+09:00", "epochMs": 50,     "channel": "A", "raw": "0x8A942005", "importParity": true,  "note": "label 240 BCD with illegal nibble 0xA"},
+      {"seq": 7,  "received": "2026-09-19T08:15:00.060+09:00", "epochMs": 60,     "channel": "A", "raw": "0xC0000005", "importParity": true,  "note": "label 240 SSM=11 functional test/failure warning"},
+      {"seq": 8,  "received": "2026-09-19T08:15:00.070+09:00", "epochMs": 70,     "channel": "A", "raw": "0x155554C2", "importParity": true,  "note": "label 103 discrete pattern"},
+      {"seq": 9,  "received": "2026-09-19T08:15:00.080+09:00", "epochMs": 80,     "channel": "A", "raw": "0x800000FF", "importParity": true,  "note": "label 377: octal display proof word, no dictionary hit"},
+      {"seq": 10, "received": "2026-09-19T08:15:00.090+09:00", "epochMs": 90,     "channel": "A", "raw": "0x8308A200", "reversed": true, "importParity": true, "note": "bit-order reversed transport word of label 203 +12deg"},
+      {"seq": 11, "received": "2026-09-19T08:15:00.330+09:00", "epochMs": 330,    "channel": "A", "raw": "0x000CE4C1", "importParity": true,  "note": "after acquisition gap: rate switch region"},
+      {"seq": 12, "received": "2026-09-19T08:15:00.410+09:00", "epochMs": 410,    "channel": "A", "raw": "0x000CE4C1", "importParity": true,  "note": "80ms later: low-rate schedule"},
+      {"seq": 13, "received": "2026-09-19T08:15:00.490+09:00", "epochMs": 490,    "channel": "A", "raw": "0x032E0CC1", "importParity": true,  "note": "low-rate schedule continues"},
+      {"seq": 14, "received": "2026-09-19T08:15:00.570+09:00", "epochMs": 570,    "channel": "A", "raw": "0x000CE4C1", "importParity": true,  "note": "low-rate schedule continues"}
+    ]
+  },
+  "script": [
+    {"id": "step-param-revision", "kind": "PARAM_REVISION", "note": "修订分段参数：低速调度槽 80ms，容差候选保留；只使速率派生失效，不改位域。", "params": {"paramsVersion": "2", "highScheduleMs": 10.0, "lowScheduleMs": 80.0}},
+    {"id": "step-source-patch", "kind": "SOURCE_PATCH", "target": "word:3", "note": "唯一直接来源改动：修复 seq 3 的奇偶位（单源、局部失效）。", "params": {"seq": 3, "rawHex": "0xC00000C1"}},
+    {"id": "step-adopt-low", "kind": "RULING", "target": "segment:11-14", "candidate": "LOW", "accepted": true, "note": "采纳低速分段候选。"},
+    {"id": "step-reject-high", "kind": "RULING", "target": "segment:11-14", "candidate": "HIGH", "accepted": false, "note": "否定同一分段的高速候选（采纳/未采纳均保留）。"},
+    {"id": "step-conflict", "kind": "CONFLICT", "target": "segment:11-14", "candidate": "LOW", "accepted": false, "note": "第二个窗口基于旧 rev 提交冲突决定，应被版本冲突拒绝并展示双方差异。"}
+  ],
+  "expectations": [
+    {"id": "E-bit-reversal", "feature": "BIT_REVERSAL", "objectUidExpr": "word:10", "branch": "main", "atEvent": "step-source-patch", "field": "labelOctal", "expected": "203", "adopted": true, "rationale": "源级位序反转在派生层反转整字后提取字段；原始 raw 0x8308A200 保持不变。", "invalidates": []},
+    {"id": "E-bad-parity-excluded", "feature": "PARITY", "objectUidExpr": "agg:203", "branch": "main", "atEvent": "step-param-revision", "field": "excludedParityCount", "expected": 1, "adopted": true, "rationale": "坏奇偶字不进入聚合值，但仍原位保留并带诊断。", "invalidates": []},
+    {"id": "E-octal-label-bits", "feature": "OCTAL_LABEL", "objectUidExpr": "word:9", "branch": "main", "atEvent": "step-param-revision", "field": "labelBits", "expected": "11111111", "adopted": true, "rationale": "八进制展示 377 不改变底层 8 个位。", "invalidates": []},
+    {"id": "E-bnr-negative", "feature": "BNR_NEGATIVE", "objectUidExpr": "word:2", "branch": "main", "atEvent": "step-param-revision", "field": "engineeringValue", "expected": -37.0, "adopted": true, "rationale": "19 位二进制补码 BNR 负值由字典分辨率换算。", "invalidates": []},
+    {"id": "E-bcd-illegal", "feature": "BCD_ILLEGAL", "objectUidExpr": "word:6", "branch": "main", "atEvent": "step-param-revision", "field": "convertible", "expected": false, "adopted": true, "rationale": "非法 BCD 数字 0xA 留在原位置并附诊断，不丢弃、不画图凑数。", "invalidates": []},
+    {"id": "E-rate-switch-candidates", "feature": "RATE_SWITCH", "objectUidExpr": "segment:11-14", "branch": "main", "atEvent": "step-reject-high", "field": "rateCandidates", "expected": ["LOW"], "adopted": true, "rationale": "采集缺口后 80ms 间隔保留为低速分段；多候选与裁定均保留。", "invalidates": []},
+    {"id": "E-ssm-invalid", "feature": "SSM_INVALID", "objectUidExpr": "word:4", "branch": "main", "atEvent": "step-param-revision", "field": "diagnostic", "expected": "no computed data", "adopted": true, "rationale": "SSM=10 在 CLASSIC 规则下为无计算数据，值保留原位、不进聚合。", "invalidates": []},
+    {"id": "E-ssm-revised-hold", "feature": "SSM_INVALID", "objectUidExpr": "word:4", "branch": "revised-interpretation", "atEvent": "step-param-revision", "field": "convertible", "expected": true, "adopted": false, "rationale": "同一字在 dict-2.0/REVISED 规则下解释不同；未采纳分支与采纳分支同时可读。", "invalidates": []},
+    {"id": "E-patch-invalidation", "feature": "PARITY", "objectUidExpr": "word:3", "branch": "main", "atEvent": "step-source-patch", "field": "parityValid", "expected": true, "adopted": true, "rationale": "单源奇偶修复只使该字派生解释与 label 203 聚合失效，不影响其他字。", "invalidates": ["word:3", "agg:203"]}
+  ]
+}
