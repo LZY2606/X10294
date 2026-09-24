@@ -1,0 +1,20 @@
+[
+  {
+    "id": "CH-A",
+    "name": "航电数据小组-A 路（正常位序）",
+    "bitOrder": "standard",
+    "note": "ARINC 429 标准位序：bit1 先发，label 字段内部反转。"
+  },
+  {
+    "id": "CH-B",
+    "name": "航电数据小组-B 路（速率演示）",
+    "bitOrder": "standard",
+    "note": "前半段 10Hz，采集缺口后切换到 20Hz。"
+  },
+  {
+    "id": "CH-R",
+    "name": "反序采集器-R 路（整体位反转）",
+    "bitOrder": "reversed32",
+    "note": "采集器以 MSB-first 记录整字，读取前需整体位序反转。"
+  }
+]

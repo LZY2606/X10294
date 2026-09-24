@@ -1,0 +1,15 @@
+{
+  "caseId": "word-decode-bench",
+  "title": "字路译码台：ARINC 429 标签、奇偶与速率分段证据",
+  "materialId": "MAT-BENCH",
+  "baselineRevision": 1,
+  "baselineBranch": "B0-baseline",
+  "baselineDict": "dict-v1",
+  "rateNominalHz": [1, 2, 5, 10, 12, 20, 25, 50],
+  "gapMultiple": 2.5,
+  "description": "离线反例档案：原位序列、接收时间、通道、奇偶结果、label/SDI/SSM/数据域与字典版本全部保留；随后对单一直接来源做位序反转、奇偶错误、八进制label、BNR负值、BCD非法数字、速率切换、SSM无效状态等边界改动，检验失效范围与候选保留。",
+  "baselineWordsFile": "baseline-words.json",
+  "channelsFile": "channels.json",
+  "dictionariesFile": "dictionaries.json",
+  "replayFile": "replay.json"
+}

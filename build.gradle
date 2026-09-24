@@ -1,0 +1,39 @@
+plugins {
+    id 'application'
+}
+
+group = 'org.gsb'
+version = '1.0.0'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'io.javalin:javalin:6.7.0'
+    implementation 'org.xerial:sqlite-jdbc:3.49.1.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.3'
+    implementation 'org.slf4j:slf4j-simple:2.0.19'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.3'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+application {
+    mainClass = 'org.gsb.a429.App'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+    systemProperty 'a429.projectdir', projectDir.absolutePath
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+    }
+}

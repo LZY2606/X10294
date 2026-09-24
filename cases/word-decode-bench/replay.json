@@ -1,0 +1,175 @@
+{
+  "rationaleRules": [
+    {
+      "ruleId": "R-octal-display",
+      "statement": "label 的八进制展示不改变底层位。",
+      "detail": "labelCode 由 bit1..8 反转得出；八进制仅为展示格式，切换十进制/八进制不会产生新解释或失效。"
+    },
+    {
+      "ruleId": "R-dict-version",
+      "statement": "BNR/BCD/discrete 解释由字典版本决定。",
+      "detail": "同一原始字在不同字典版本下可得到不同解释；回滚到旧事件必须恢复当时字典版本与结论。"
+    },
+    {
+      "ruleId": "R-rate-segments",
+      "statement": "速率变化与采集缺口保留分段候选。",
+      "detail": "无法唯一决定速率时保留全部合法候选；采集缺口按 gapMultiple 切段，候选随参数变化重算并记录失效范围。"
+    },
+    {
+      "ruleId": "R-bad-parity",
+      "statement": "坏奇偶字不进入聚合值。",
+      "detail": "奇偶校验失败的字保留在原位序列中并展示，但被排除在任何速率/工程值聚合之外。"
+    }
+  ],
+  "steps": [
+    {
+      "seq": 1,
+      "kind": "counterBranch",
+      "branch": "B1-bit-reverse",
+      "name": "反例-位序反转",
+      "fromBranch": "B0-baseline",
+      "mutations": [
+        {"type": "bitReverse", "wordId": "W02", "target": "whole32",
+         "directSourceSid": "raw:MAT-BENCH:1:W02"}
+      ],
+      "expect": {
+        "affectedObjectSids": ["raw:MAT-BENCH:1:W02", "interp:B1-bit-reverse:raw:MAT-BENCH:1:W02"],
+        "invalidatesClass": ["interpretation", "aggregates-for-label-313-on-CH-A"],
+        "keepsIntact": ["label octal of every other word", "raw bytes of every other word"]
+      },
+      "rationaleRuleIds": ["R-octal-display"]
+    },
+    {
+      "seq": 2,
+      "kind": "counterBranch",
+      "branch": "B2-parity-error",
+      "name": "反例-奇偶错误",
+      "fromBranch": "B0-baseline",
+      "mutations": [
+        {"type": "flipParity", "wordId": "W02",
+         "directSourceSid": "raw:MAT-BENCH:1:W02"}
+      ],
+      "expect": {
+        "parityValidFor": "W02=false",
+        "aggregates": "label-313 aggregate excludes W02",
+        "keepsIntact": ["word remains at seq=2", "label/SDI/SSM/data bits unchanged"]
+      },
+      "rationaleRuleIds": ["R-bad-parity"]
+    },
+    {
+      "seq": 3,
+      "kind": "counterBranch",
+      "branch": "B3-bnr-negative",
+      "name": "反例-BNR负值",
+      "fromBranch": "B0-baseline",
+      "mutations": [
+        {"type": "setData", "wordId": "W05", "dataHex": "7FF80",
+         "directSourceSid": "raw:MAT-BENCH:1:W05"}
+      ],
+      "expect": {
+        "engineeringValue": "normal-acceleration = -0.5 g (机体法向轴)",
+        "encoding": "BNR twos-complement",
+        "keepsIntact": ["parity stays odd after recompute", "label 314 octal unchanged"]
+      },
+      "rationaleRuleIds": ["R-dict-version"]
+    },
+    {
+      "seq": 4,
+      "kind": "counterBranch",
+      "branch": "B4-bcd-illegal",
+      "name": "反例-BCD非法数字",
+      "fromBranch": "B0-baseline",
+      "mutations": [
+        {"type": "setData", "wordId": "W08", "dataHex": "123C",
+         "directSourceSid": "raw:MAT-BENCH:1:W08"}
+      ],
+      "expect": {
+        "diagnostic": "bcd-illegal-digit-minutes-low=0xC@bits11-14",
+        "valueKeptInPlace": true,
+        "aggregates": "no numeric BCD value enters aggregation"
+      },
+      "rationaleRuleIds": []
+    },
+    {
+      "seq": 5,
+      "kind": "counterBranch",
+      "branch": "B5-rate-switch",
+      "name": "反例-速率切换参数",
+      "fromBranch": "B0-baseline",
+      "mutations": [
+        {"type": "rateParam", "rateNominalHz": [10, 20], "gapMultiple": 4.0}
+      ],
+      "expect": {
+        "segments": "CH-B 保留 10Hz 段与 20Hz 段两个候选分段；缺口仍切段",
+        "invalidatesClass": ["rate-candidates", "rate-segments"],
+        "keepsIntact": ["all raw words", "all engineering interpretations"]
+      },
+      "rationaleRuleIds": ["R-rate-segments"]
+    },
+    {
+      "seq": 6,
+      "kind": "counterBranch",
+      "branch": "B6-ssm-invalid",
+      "name": "反例-SSM无效状态",
+      "fromBranch": "B0-baseline",
+      "mutations": [
+        {"type": "setSsm", "wordId": "W02", "ssm": 2,
+         "directSourceSid": "raw:MAT-BENCH:1:W02"}
+      ],
+      "expect": {
+        "ssmState": "NO_COMPUTED_DATA",
+        "aggregates": "W02 excluded as non-functional",
+        "display": "word remains with diagnostic ssm-no-computed-data"
+      },
+      "rationaleRuleIds": []
+    },
+    {
+      "seq": 7,
+      "kind": "counterBranch",
+      "branch": "B7-source-fix-local",
+      "name": "反例-单一来源局部修正",
+      "fromBranch": "B2-parity-error",
+      "mutations": [
+        {"type": "sourceRevision", "revisionSeq": 2,
+         "change": {"type": "flipParity", "wordId": "W02",
+                    "replacesSid": "raw:MAT-BENCH:1:W02"}}
+      ],
+      "expect": {
+        "invalidationScope": "only W02 interpretation and label-313 aggregate on CH-A",
+        "keepsIntact": ["W01,W03.. interpretations", "CH-B rate segments", "old branch B2 still readable"]
+      },
+      "rationaleRuleIds": ["R-bad-parity"]
+    },
+    {
+      "seq": 8,
+      "kind": "paramBranch",
+      "branch": "B8-dict-v2",
+      "name": "参数修订-dict-v2",
+      "fromBranch": "B0-baseline",
+      "mutations": [
+        {"type": "dictRevision", "dictVersion": "dict-v2"}
+      ],
+      "expect": {
+        "invalidatesClass": ["interpretations of label 314 only"],
+        "label204Interpretation": "DISCRETE accel-source-discrete",
+        "label203Interpretation": "BNR indicated-air-speed unchanged"
+      },
+      "rationaleRuleIds": ["R-dict-version"]
+    },
+    {
+      "seq": 9,
+      "kind": "conflictScenario",
+      "branch": "B0-baseline",
+      "name": "冲突的人工决定",
+      "conflict": {
+        "firstActor": "reviewer-1",
+        "firstDecision": {"action": "accept", "candidateSid": "segcand:B0-baseline:CH-B:seg-2:20Hz"},
+        "secondActor": "reviewer-2",
+        "secondDecision": {"action": "accept", "candidateSid": "segcand:B0-baseline:CH-B:seg-2:10Hz",
+                           "baseEventSeq": 0},
+        "expect": "second commit gets 409 with both sides diff and accepted candidate sids"
+      },
+      "rationaleRuleIds": ["R-rate-segments"]
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "versions": [
+    {
+      "version": "dict-v1",
+      "note": "字路译码台初始字典：204 为 BNR 法向加速度；270 为 discrete。",
+      "supersedes": null
+    },
+    {
+      "version": "dict-v2",
+      "note": "参数修订：204 改判为 discrete 离散字，270 位含义不变。用于检验局部失效（仅 204 受影响）。",
+      "supersedes": "dict-v1"
+    }
+  ],
+  "entries": [
+    {
+      "sid": "dict-v1:204:sdi-any",
+      "dictVersion": "dict-v1",
+      "labelOctal": "314",
+      "sdi": null,
+      "encoding": "BNR",
+      "name": "normal-acceleration",
+      "spec": {
+        "lo": 11, "hi": 29, "signed": true, "lsb": 0.00390625,
+        "unit": "g", "basis": "机体法向轴, 向下为正约定"
+      }
+    },
+    {
+      "sid": "dict-v1:203:sdi-any",
+      "dictVersion": "dict-v1",
+      "labelOctal": "313",
+      "sdi": null,
+      "encoding": "BNR",
+      "name": "indicated-air-speed",
+      "spec": {
+        "lo": 11, "hi": 29, "signed": false, "lsb": 0.25,
+        "unit": "kn", "basis": "指示空速, ISA"
+      }
+    },
+    {
+      "sid": "dict-v1:310:sdi-any",
+      "dictVersion": "dict-v1",
+      "labelOctal": "466",
+      "sdi": null,
+      "encoding": "BCD",
+      "name": "utc-time-hm",
+      "spec": {
+        "lo": 11, "hi": 26,
+        "digitNames": ["minutes-low", "minutes-high", "hours-low", "hours-high"],
+        "unit": "HHMM", "basis": "UTC"
+      }
+    },
+    {
+      "sid": "dict-v1:270:sdi-any",
+      "dictVersion": "dict-v1",
+      "labelOctal": "416",
+      "sdi": null,
+      "encoding": "DISCRETE",
+      "name": "landing-gear-flaps",
+      "spec": {
+        "unit": "state",
+        "basis": "离散量坐标基准: bit=1 表示有效/放下",
+        "bitNames": {"11": "gear-left-locked", "12": "gear-nose-locked",
+                     "13": "gear-right-locked", "14": "flaps-extended"}
+      }
+    },
+    {
+      "sid": "dict-v2:204:sdi-any",
+      "dictVersion": "dict-v2",
+      "labelOctal": "314",
+      "sdi": null,
+      "encoding": "DISCRETE",
+      "name": "accel-source-discrete",
+      "spec": {
+        "unit": "state",
+        "basis": "v2 离散量坐标基准: 加速度源有效位",
+        "bitNames": {"11": "accel-valid", "12": "accel-source-ir-1",
+                     "13": "accel-source-ir-2", "14": "accel-test-mode"}
+      }
+    },
+    {
+      "sid": "dict-v2:203:sdi-any",
+      "dictVersion": "dict-v2",
+      "labelOctal": "313",
+      "sdi": null,
+      "encoding": "BNR",
+      "name": "indicated-air-speed",
+      "spec": {
+        "lo": 11, "hi": 29, "signed": false, "lsb": 0.25,
+        "unit": "kn", "basis": "指示空速, ISA"
+      }
+    },
+    {
+      "sid": "dict-v2:310:sdi-any",
+      "dictVersion": "dict-v2",
+      "labelOctal": "466",
+      "sdi": null,
+      "encoding": "BCD",
+      "name": "utc-time-hm",
+      "spec": {
+        "lo": 11, "hi": 26,
+        "digitNames": ["minutes-low", "minutes-high", "hours-low", "hours-high"],
+        "unit": "HHMM", "basis": "UTC"
+      }
+    },
+    {
+      "sid": "dict-v2:270:sdi-any",
+      "dictVersion": "dict-v2",
+      "labelOctal": "416",
+      "sdi": null,
+      "encoding": "DISCRETE",
+      "name": "landing-gear-flaps",
+      "spec": {
+        "unit": "state",
+        "basis": "离散量坐标基准: bit=1 表示有效/放下",
+        "bitNames": {"11": "gear-left-locked", "12": "gear-nose-locked",
+                     "13": "gear-right-locked", "14": "flaps-extended"}
+      }
+    }
+  ]
+}
