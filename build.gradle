@@ -1,0 +1,41 @@
+plugins {
+    id 'application'
+}
+
+group = 'a429.review'
+version = '1.0.0'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'io.javalin:javalin:7.2.3'
+    implementation 'org.xerial:sqlite-jdbc:3.53.4.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.22.3'
+    implementation 'org.slf4j:slf4j-simple:2.0.20'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.14.4'
+    testImplementation 'com.microsoft.playwright:playwright:1.63.0'
+}
+
+application {
+    mainClass = 'a429.review.Main'
+}
+
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+    // Browser-based E2E needs a display; it uses the installed Google Chrome channel.
+    systemProperty 'browser.channel', System.getProperty('browser.channel', 'chrome')
+    systemProperty 'server.port', System.getProperty('server.port', '0')
+}
+
+run {
+    // allow ./gradlew run --args='--host ... --port ...'
+}
