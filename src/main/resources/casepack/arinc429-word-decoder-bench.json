@@ -1,0 +1,365 @@
+{
+  "packId" : "arinc429-word-decoder-bench",
+  "title" : "字路译码台：ARINC 429 标签、奇偶与速率分段证据",
+  "initialDictVersion" : "wordlabel-dict-v1",
+  "channels" : [ {
+    "channel" : "CH_A",
+    "name" : "Left Bus A",
+    "expectedRateKhz" : 12.5,
+    "bus" : "ARINC429-TX-A"
+  }, {
+    "channel" : "CH_B",
+    "name" : "Right Bus B",
+    "expectedRateKhz" : 100.0,
+    "bus" : "ARINC429-TX-B"
+  } ],
+  "dictionaries" : [ {
+    "versionId" : "wordlabel-dict-v1",
+    "publishedAt" : "2024-01-15",
+    "unitSign" : "SIGNED_SYMMETRIC",
+    "coordinateBasis" : "BODY_AXIS",
+    "defs" : [ {
+      "labelOctal" : "310",
+      "name" : "PITCH_ATTITUDE",
+      "encoding" : "BNR",
+      "unit" : "deg",
+      "range" : 180.0,
+      "msb" : 28,
+      "lsb" : 11,
+      "impliedDecimals" : 0,
+      "discreteBits" : { }
+    }, {
+      "labelOctal" : "203",
+      "name" : "VHF_SELECTED_FREQ",
+      "encoding" : "BCD",
+      "unit" : "MHz",
+      "range" : 0.0,
+      "msb" : 28,
+      "lsb" : 13,
+      "impliedDecimals" : 2,
+      "discreteBits" : { }
+    }, {
+      "labelOctal" : "270",
+      "name" : "AP_STATUS",
+      "encoding" : "DISCRETE",
+      "unit" : "state",
+      "range" : 0.0,
+      "msb" : 28,
+      "lsb" : 11,
+      "impliedDecimals" : 0,
+      "discreteBits" : {
+        "11" : "AP_DISENGAGED",
+        "12" : "YD_DISENGAGED",
+        "13" : "GLIDESLOPE_CAPTURE"
+      }
+    }, {
+      "labelOctal" : "204",
+      "name" : "ALTITUDE",
+      "encoding" : "BNR",
+      "unit" : "ft",
+      "range" : 65536.0,
+      "msb" : 28,
+      "lsb" : 11,
+      "impliedDecimals" : 0,
+      "discreteBits" : { }
+    }, {
+      "labelOctal" : "206",
+      "name" : "INDICATED_AIRSPEED",
+      "encoding" : "BNR",
+      "unit" : "kn",
+      "range" : 1024.0,
+      "msb" : 28,
+      "lsb" : 11,
+      "impliedDecimals" : 0,
+      "discreteBits" : { }
+    } ]
+  }, {
+    "versionId" : "wordlabel-dict-v2",
+    "publishedAt" : "2025-06-01",
+    "unitSign" : "SIGNED_SYMMETRIC",
+    "coordinateBasis" : "BODY_AXIS",
+    "defs" : [ {
+      "labelOctal" : "310",
+      "name" : "PITCH_ATTITUDE",
+      "encoding" : "BNR",
+      "unit" : "deg",
+      "range" : 90.0,
+      "msb" : 28,
+      "lsb" : 11,
+      "impliedDecimals" : 0,
+      "discreteBits" : { }
+    }, {
+      "labelOctal" : "203",
+      "name" : "VHF_SELECTED_FREQ",
+      "encoding" : "BCD",
+      "unit" : "MHz",
+      "range" : 0.0,
+      "msb" : 28,
+      "lsb" : 13,
+      "impliedDecimals" : 2,
+      "discreteBits" : { }
+    }, {
+      "labelOctal" : "270",
+      "name" : "AP_STATUS",
+      "encoding" : "DISCRETE",
+      "unit" : "state",
+      "range" : 0.0,
+      "msb" : 28,
+      "lsb" : 11,
+      "impliedDecimals" : 0,
+      "discreteBits" : {
+        "11" : "AP_DISENGAGED",
+        "12" : "YD_DISENGAGED",
+        "13" : "GLIDESLOPE_CAPTURE",
+        "14" : "FLARE_ARMED"
+      }
+    }, {
+      "labelOctal" : "204",
+      "name" : "ALTITUDE",
+      "encoding" : "BNR",
+      "unit" : "ft",
+      "range" : 65536.0,
+      "msb" : 28,
+      "lsb" : 11,
+      "impliedDecimals" : 0,
+      "discreteBits" : { }
+    }, {
+      "labelOctal" : "206",
+      "name" : "INDICATED_AIRSPEED",
+      "encoding" : "BNR",
+      "unit" : "kn",
+      "range" : 1024.0,
+      "msb" : 28,
+      "lsb" : 11,
+      "impliedDecimals" : 0,
+      "discreteBits" : { }
+    } ]
+  } ],
+  "words" : [ {
+    "seq" : 0,
+    "timeMs" : 0.0,
+    "channel" : "CH_A",
+    "rawHex" : "0F71C8C9"
+  }, {
+    "seq" : 1,
+    "timeMs" : 0.08,
+    "channel" : "CH_A",
+    "rawHex" : "004E2084"
+  }, {
+    "seq" : 2,
+    "timeMs" : 0.16,
+    "channel" : "CH_A",
+    "rawHex" : "01215082"
+  }, {
+    "seq" : 3,
+    "timeMs" : 0.24,
+    "channel" : "CH_A",
+    "rawHex" : "000000B9"
+  }, {
+    "seq" : 4,
+    "timeMs" : 0.32,
+    "channel" : "CH_A",
+    "rawHex" : "01680086"
+  }, {
+    "seq" : 5,
+    "timeMs" : 0.4,
+    "channel" : "CH_A",
+    "rawHex" : "0038E4C9"
+  }, {
+    "seq" : 6,
+    "timeMs" : 0.48,
+    "channel" : "CH_A",
+    "rawHex" : "004E7084"
+  }, {
+    "seq" : 7,
+    "timeMs" : 0.56,
+    "channel" : "CH_A",
+    "rawHex" : "01217083"
+  }, {
+    "seq" : 8,
+    "timeMs" : 8.0,
+    "channel" : "CH_A",
+    "rawHex" : "003B2CC8"
+  }, {
+    "seq" : 9,
+    "timeMs" : 8.5,
+    "channel" : "CH_A",
+    "rawHex" : "004EC085"
+  }, {
+    "seq" : 10,
+    "timeMs" : 9.0,
+    "channel" : "CH_A",
+    "rawHex" : "01360082"
+  }, {
+    "seq" : 11,
+    "timeMs" : 10.0,
+    "channel" : "CH_A",
+    "rawHex" : "003D70C8"
+  }, {
+    "seq" : 12,
+    "timeMs" : 10.5,
+    "channel" : "CH_A",
+    "rawHex" : "004F1085"
+  }, {
+    "seq" : 13,
+    "timeMs" : 0.0,
+    "channel" : "CH_B",
+    "rawHex" : "23C8C085"
+  }, {
+    "seq" : 14,
+    "timeMs" : 0.01,
+    "channel" : "CH_B",
+    "rawHex" : "01B80087"
+  }, {
+    "seq" : 15,
+    "timeMs" : 0.02,
+    "channel" : "CH_B",
+    "rawHex" : "23C91085"
+  }, {
+    "seq" : 16,
+    "timeMs" : 0.03,
+    "channel" : "CH_B",
+    "rawHex" : "01BA0086"
+  }, {
+    "seq" : 17,
+    "timeMs" : 0.04,
+    "channel" : "CH_B",
+    "rawHex" : "23C96084"
+  } ],
+  "probes" : [ {
+    "id" : "probe-bit-reversal",
+    "kind" : "BIT_REVERSAL",
+    "title" : "位序反转变体",
+    "description" : "Only the byte ordering of one direct source word is inverted; the reversed candidate must stay visible and scoped.",
+    "wordHexOverrides" : {
+      "w:pack-baseline-001#0" : "93138EF0"
+    },
+    "timeOverrides" : { },
+    "expectations" : [ {
+      "id" : "expect-reversed-candidate",
+      "description" : "The inverted feed yields a viable alternative convention for the same word SID only.",
+      "affectedSidPatterns" : [ "ev:w:pack-baseline-001#0:BIT_REVERSED_32:*", "w:pack-baseline-001#0:probe@*" ],
+      "mustPreserveSidPatterns" : [ "ev:w:pack-baseline-001#1:*", "rc:CH_A:*", "agg:*" ],
+      "adoptedSignals" : [ "BIT_REVERSAL_CANDIDATE_PRESERVED" ],
+      "rejectedSignals" : [ ]
+    } ]
+  }, {
+    "id" : "probe-parity-error",
+    "kind" : "PARITY_ERROR",
+    "title" : "奇偶错误变体",
+    "description" : "Flip the parity bit of one altitude word; the word remains in place but must be excluded from aggregates.",
+    "wordHexOverrides" : {
+      "w:pack-baseline-001#1" : "804E2084"
+    },
+    "timeOverrides" : { },
+    "expectations" : [ {
+      "id" : "expect-bad-parity-excluded",
+      "description" : "BAD_PARITY diagnostic on word #1 and the 204 aggregate reports one excluded word.",
+      "affectedSidPatterns" : [ "ev:w:pack-baseline-001#1:*", "agg:204:*" ],
+      "mustPreserveSidPatterns" : [ "agg:310:*", "agg:203:*" ],
+      "adoptedSignals" : [ "BAD_PARITY" ],
+      "rejectedSignals" : [ ]
+    } ]
+  }, {
+    "id" : "probe-octal-label",
+    "kind" : "OCTAL_LABEL",
+    "title" : "八进制 label 展示",
+    "description" : "Request octal rendering for all labels without touching any raw hex; raw bytes and parity are unchanged.",
+    "wordHexOverrides" : { },
+    "timeOverrides" : { },
+    "expectations" : [ {
+      "id" : "expect-octal-is-presentation-only",
+      "description" : "Every rawHex in the probe state equals the baseline and labels render as three octal digits.",
+      "affectedSidPatterns" : [ ],
+      "mustPreserveSidPatterns" : [ "w:*" ],
+      "adoptedSignals" : [ "OCTAL_LABEL_BASIS" ],
+      "rejectedSignals" : [ ]
+    } ]
+  }, {
+    "id" : "probe-bnr-negative",
+    "kind" : "BNR_NEGATIVE",
+    "title" : "BNR 负值变体",
+    "description" : "Replace one pitch word with -45 deg two's complement; only pitch-derived values change.",
+    "wordHexOverrides" : {
+      "w:pack-baseline-001#5" : "0E0000C9"
+    },
+    "timeOverrides" : { },
+    "expectations" : [ {
+      "id" : "expect-negative-bnr-scoped",
+      "description" : "Pitch decodes to a negative degree value; altitude, frequency and rate rows are untouched.",
+      "affectedSidPatterns" : [ "ev:w:pack-baseline-001#5:*", "agg:310:*" ],
+      "mustPreserveSidPatterns" : [ "agg:204:*", "agg:203:*", "rc:*" ],
+      "adoptedSignals" : [ "-45.0 deg" ],
+      "rejectedSignals" : [ ]
+    } ]
+  }, {
+    "id" : "probe-bcd-illegal",
+    "kind" : "BCD_ILLEGAL",
+    "title" : "BCD 非法数字变体",
+    "description" : "Force nibble A into the second frequency digit; the value is kept in place with a BCD diagnostic.",
+    "wordHexOverrides" : {
+      "w:pack-baseline-001#2" : "01A15083"
+    },
+    "timeOverrides" : { },
+    "expectations" : [ {
+      "id" : "expect-illegal-digit-kept",
+      "description" : "Word #2 shows '?' in the BCD text and does not contribute a numeric aggregate.",
+      "affectedSidPatterns" : [ "ev:w:pack-baseline-001#2:*", "agg:203:*" ],
+      "mustPreserveSidPatterns" : [ "agg:310:*" ],
+      "adoptedSignals" : [ "BCD_ILLEGAL" ],
+      "rejectedSignals" : [ ]
+    } ]
+  }, {
+    "id" : "probe-rate-switch",
+    "kind" : "RATE_SWITCH",
+    "title" : "速率切换变体",
+    "description" : "Move later CH_A arrivals to a slower cadence so a rate switch joins the existing gap.",
+    "wordHexOverrides" : { },
+    "timeOverrides" : {
+      "w:pack-baseline-001#11" : 11.0,
+      "w:pack-baseline-001#12" : 12.0
+    },
+    "expectations" : [ {
+      "id" : "expect-rate-segmentation",
+      "description" : "CH_A keeps all three segmentation candidates and the adaptive candidate becomes preferred.",
+      "affectedSidPatterns" : [ "rc:CH_A:RATE_ADAPTIVE", "rs:CH_A:RATE_ADAPTIVE#*", "iv:CH_A#*" ],
+      "mustPreserveSidPatterns" : [ "ev:*", "agg:*" ],
+      "adoptedSignals" : [ "RATE_CANDIDATE_BASIS" ],
+      "rejectedSignals" : [ ]
+    } ]
+  }, {
+    "id" : "probe-ssm-invalid",
+    "kind" : "SSM_INVALID",
+    "title" : "SSM 无效状态变体",
+    "description" : "Set the discrete SSM to functional failure for one AP status word.",
+    "wordHexOverrides" : {
+      "w:pack-baseline-001#3" : "300000B9"
+    },
+    "timeOverrides" : { },
+    "expectations" : [ {
+      "id" : "expect-ssm-invalid-visible",
+      "description" : "Word #3 keeps its discrete text but is marked FUNCTIONAL_FAILURE/SSM_INVALID.",
+      "affectedSidPatterns" : [ "ev:w:pack-baseline-001#3:*" ],
+      "mustPreserveSidPatterns" : [ "ev:w:pack-baseline-001#4:*", "agg:*" ],
+      "adoptedSignals" : [ "SSM_INVALID" ],
+      "rejectedSignals" : [ ]
+    } ]
+  } ],
+  "judgements" : [ {
+    "key" : "octal_label_preserves_bits",
+    "statement" : "Octal label rendering is presentation of the same 8 on-wire bits and never rewrites the raw word.",
+    "evidenceEventKind" : "OCTAL_LABEL_BASIS"
+  }, {
+    "key" : "encoding_by_dict_version",
+    "statement" : "BNR, BCD and discrete interpretations are chosen by the cited dictionary version.",
+    "evidenceEventKind" : "ENCODING_DICT_VERSION_BASIS"
+  }, {
+    "key" : "rate_segments_keep_candidates",
+    "statement" : "Rate changes and acquisition gaps produce segmentation candidates that all remain on record.",
+    "evidenceEventKind" : "RATE_CANDIDATE_BASIS"
+  }, {
+    "key" : "bad_parity_excluded",
+    "statement" : "Bad parity words stay visible with diagnostics but never enter an aggregate engineering value.",
+    "evidenceEventKind" : "BAD_PARITY_EXCLUSION_BASIS"
+  } ]
+}
