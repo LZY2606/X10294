@@ -1,0 +1,225 @@
+{
+  "id": "arinc429-wordlab-case",
+  "title": "字路译码台：ARINC 429 标签、奇偶与速率分段证据",
+  "dictVersions": {
+    "v1": {
+      "203": {
+        "encoding": "BNR",
+        "unit": "kt",
+        "resolution": 0.5,
+        "sigBits": 19,
+        "description": "Airspeed"
+      },
+      "204": {
+        "encoding": "BNR",
+        "unit": "ft",
+        "resolution": 1.0,
+        "sigBits": 19,
+        "description": "Altitude"
+      },
+      "230": {
+        "encoding": "BCD",
+        "unit": "kt",
+        "resolution": 1.0,
+        "sigBits": 16,
+        "description": "Ground speed"
+      },
+      "260": {
+        "encoding": "DISC",
+        "unit": "",
+        "resolution": 1.0,
+        "sigBits": 19,
+        "description": "Discrete word"
+      },
+      "031": {
+        "encoding": "BNR",
+        "unit": "deg",
+        "resolution": 0.1,
+        "sigBits": 19,
+        "description": "Test angle"
+      }
+    },
+    "v2": {
+      "203": {
+        "encoding": "BNR",
+        "unit": "kt",
+        "resolution": 0.5,
+        "sigBits": 19,
+        "description": "Airspeed"
+      },
+      "204": {
+        "encoding": "BNR",
+        "unit": "ft",
+        "resolution": 0.5,
+        "sigBits": 19,
+        "description": "Altitude (revised resolution)"
+      },
+      "230": {
+        "encoding": "BCD",
+        "unit": "kt",
+        "resolution": 1.0,
+        "sigBits": 16,
+        "description": "Ground speed"
+      },
+      "260": {
+        "encoding": "DISC",
+        "unit": "",
+        "resolution": 1.0,
+        "sigBits": 19,
+        "description": "Discrete word"
+      },
+      "031": {
+        "encoding": "BNR",
+        "unit": "deg",
+        "resolution": 0.1,
+        "sigBits": 19,
+        "description": "Test angle"
+      }
+    }
+  },
+  "channels": [
+    {
+      "id": 1,
+      "name": "ADC-1 bus A",
+      "expectedRatesBps": [
+        12500,
+        100000
+      ]
+    }
+  ],
+  "words": [
+    {
+      "seq": 0,
+      "rxTimeNs": 0,
+      "channel": 1,
+      "hex": "0x6004B0C1",
+      "note": "BNR baseline +150.0 kt"
+    },
+    {
+      "seq": 1,
+      "rxTimeNs": 360000,
+      "channel": 1,
+      "hex": "0xE004B4C1",
+      "note": "BNR baseline +150.5 kt"
+    },
+    {
+      "seq": 2,
+      "rxTimeNs": 720000,
+      "channel": 1,
+      "hex": "0x604E2021",
+      "note": "BNR altitude 5000 ft (dict param revision target)"
+    },
+    {
+      "seq": 3,
+      "rxTimeNs": 1080000,
+      "channel": 1,
+      "hex": "0xFFFDBCC1",
+      "note": "BNR negative -72.5 kt two's complement"
+    },
+    {
+      "seq": 4,
+      "rxTimeNs": 1440000,
+      "channel": 1,
+      "hex": "0x6004B8C1",
+      "note": "PARITY ERROR word, excluded from aggregates"
+    },
+    {
+      "seq": 5,
+      "rxTimeNs": 1800000,
+      "channel": 1,
+      "hex": "0x0048FC19",
+      "note": "BCD illegal digit 0xF"
+    },
+    {
+      "seq": 6,
+      "rxTimeNs": 2160000,
+      "channel": 1,
+      "hex": "0x80114019",
+      "note": "BCD valid 0450 kt, SSM plus"
+    },
+    {
+      "seq": 7,
+      "rxTimeNs": 2520000,
+      "channel": 1,
+      "hex": "0xA004B0C1",
+      "note": "SSM invalid (NCD), not aggregateable"
+    },
+    {
+      "seq": 8,
+      "rxTimeNs": 2880000,
+      "channel": 1,
+      "hex": "0x831B2007",
+      "note": "BIT-ORDER REVERSED capture; reversed decode = label 203, 155.0 kt"
+    },
+    {
+      "seq": 9,
+      "rxTimeNs": 3240000,
+      "channel": 1,
+      "hex": "0x6000140D",
+      "note": "DISCRETE word bits 0 and 2 set"
+    },
+    {
+      "seq": 10,
+      "rxTimeNs": 6120000,
+      "channel": 1,
+      "hex": "0x600500C1",
+      "note": "low-rate segment word 1"
+    },
+    {
+      "seq": 11,
+      "rxTimeNs": 9000000,
+      "channel": 1,
+      "hex": "0xE00504C1",
+      "note": "low-rate segment word 2"
+    },
+    {
+      "seq": 12,
+      "rxTimeNs": 29000000,
+      "channel": 1,
+      "hex": "0xE00508C1",
+      "note": "after acquisition gap"
+    },
+    {
+      "seq": 13,
+      "rxTimeNs": 31880000,
+      "channel": 1,
+      "hex": "0x60050CC1",
+      "note": "low-rate word"
+    },
+    {
+      "seq": 14,
+      "rxTimeNs": 33380000,
+      "channel": 1,
+      "hex": "0xE00510C1",
+      "note": "after ambiguous 1.5 ms gap"
+    },
+    {
+      "seq": 15,
+      "rxTimeNs": 36260000,
+      "channel": 1,
+      "hex": "0x600514C1",
+      "note": "final word"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "param-revision",
+      "kind": "dict-revision",
+      "from": "v1",
+      "to": "v2",
+      "note": "label 204 resolution 1.0 -> 0.5 ft; only label-204 interpretations invalidated"
+    },
+    {
+      "id": "source-change",
+      "kind": "word-fix",
+      "seq": 4,
+      "hex": "0xE004B8C1",
+      "note": "correct parity of seq 4; only that word's dependents invalidated"
+    },
+    {
+      "id": "conflicting-decisions",
+      "kind": "decision-conflict",
+      "note": "reviewer A accepts rank-0 rate candidate, reviewer B accepts rank-1 with stale base version -> 409 conflict, both kept"
+    }
+  ]
+}
