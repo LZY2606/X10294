@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'io.javalin:javalin:6.3.0'
+    implementation 'org.xerial:sqlite-jdbc:3.46.1.3'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.2'
+    implementation 'org.slf4j:slf4j-simple:2.0.13'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.3'
+    testImplementation 'org.htmlunit:htmlunit:4.4.0'
+}
+
+application {
+    mainClass = 'gsb.App'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+    testLogging {
+        events 'passed', 'failed', 'skipped'
+    }
+}
+
+tasks.register('genCase', JavaExec) {
+    group = 'domain'
+    description = 'Regenerates the offline ARINC 429 case package cases/word-decode-bench.json'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'gsb.CaseGen'
+}
