@@ -1,0 +1,52 @@
+{
+  "case": "arinc429-word-decode-baseline",
+  "title": "字路译码台：ARINC 429 标签、奇偶与速率分段证据",
+  "narrative": "航电数据小组导入时间戳和三十二位原始字、通道配置与标签字典，审阅字序、速率分段和工程值解释",
+  "importId": "imp-baseline",
+  "importName": "ARINC429 基线导入（原位序列/接收时间/通道/奇偶/label/SDI/SSM/数据域/字典版本均保留）",
+  "channels": ["A", "B"],
+  "baselineDict": "dict-v1",
+  "dicts": [
+    {
+      "version": "dict-v1",
+      "entries": [
+        {"id": "de-035-v1", "label": "035", "encoding": "BNR", "resolution": 0.01, "unit": "deg", "frame": "body-axis", "description": "俯仰角"},
+        {"id": "de-204-v1", "label": "204", "encoding": "BCD", "resolution": 1.0, "unit": "ft", "frame": "baro-altitude", "description": "气压高度"},
+        {"id": "de-356-v1", "label": "356", "encoding": "DISCRETE", "resolution": 1.0, "unit": "bool", "frame": "n/a", "description": "离散量"}
+      ]
+    },
+    {
+      "version": "dict-v2",
+      "entries": [
+        {"id": "de-035-v2", "label": "035", "encoding": "BNR", "resolution": 0.001, "unit": "deg", "frame": "body-axis", "description": "俯仰角（参数修订：分辨率 0.01 -> 0.001）"},
+        {"id": "de-204-v1", "label": "204", "encoding": "BCD", "resolution": 1.0, "unit": "ft", "frame": "baro-altitude", "description": "气压高度"},
+        {"id": "de-356-v1", "label": "356", "encoding": "DISCRETE", "resolution": 1.0, "unit": "bool", "frame": "n/a", "description": "离散量"}
+      ]
+    }
+  ],
+  "words": [
+    {"seq": 1,  "tMs": 0,    "channel": "A", "label": "035", "sdi": 0, "data": 1500,   "ssm": 0, "parity": "good", "note": "BNR 正值 +15.00 deg"},
+    {"seq": 2,  "tMs": 100,  "channel": "A", "label": "035", "sdi": 0, "data": 523054, "ssm": 0, "parity": "good", "note": "BNR 负值 -12.34 deg（补码）"},
+    {"seq": 3,  "tMs": 200,  "channel": "A", "label": "204", "sdi": 0, "data": 4688,   "ssm": 0, "parity": "good", "note": "BCD 合法 1250 ft"},
+    {"seq": 4,  "tMs": 300,  "channel": "A", "label": "204", "sdi": 0, "data": 4773,   "ssm": 0, "parity": "good", "note": "BCD 非法数字 0xA，保留原位并附诊断"},
+    {"seq": 5,  "tMs": 400,  "channel": "A", "label": "035", "sdi": 0, "data": 100,    "ssm": 0, "parity": "bad",  "note": "奇偶错误，坏奇偶字不进入聚合值"},
+    {"seq": 6,  "tMs": 900,  "channel": "A", "label": "035", "sdi": 0, "data": 200,    "ssm": 3, "parity": "good", "note": "SSM=3 无效状态；前有采集缺口"},
+    {"seq": 7,  "tMs": 950,  "channel": "A", "label": "035", "sdi": 0, "data": 300,    "ssm": 0, "parity": "good", "wireLabelCorrect": false, "note": "位序反转：线上 label 字节未反转，解码为 270"},
+    {"seq": 8,  "tMs": 1000, "channel": "A", "label": "035", "sdi": 0, "data": 500,    "ssm": 0, "parity": "good", "note": "速率切换后 20Hz"},
+    {"seq": 9,  "tMs": 1050, "channel": "A", "label": "035", "sdi": 0, "data": 600,    "ssm": 0, "parity": "good", "note": "速率切换后 20Hz"},
+    {"seq": 10, "tMs": 1100, "channel": "A", "label": "035", "sdi": 0, "data": 700,    "ssm": 0, "parity": "good", "note": "速率切换后 20Hz"},
+    {"seq": 11, "tMs": 0,    "channel": "B", "label": "356", "sdi": 1, "data": 5,      "ssm": 0, "parity": "good", "note": "discrete 位 1,3"},
+    {"seq": 12, "tMs": 200,  "channel": "B", "label": "356", "sdi": 1, "data": 7,      "ssm": 0, "parity": "good", "note": "discrete 位 1,2,3"},
+    {"seq": 13, "tMs": 400,  "channel": "B", "label": "356", "sdi": 1, "data": 1,      "ssm": 0, "parity": "good", "note": "discrete 位 1"},
+    {"seq": 14, "tMs": 600,  "channel": "B", "label": "356", "sdi": 1, "data": 0,      "ssm": 0, "parity": "good", "note": "discrete 全 0"}
+  ],
+  "mutations": [
+    {"type": "param-revision", "branch": "br-param-revision", "dictVersion": "dict-v2",
+     "note": "参数修订：label 035 分辨率 0.01 -> 0.001，只影响依赖 de-035 的工程值"},
+    {"type": "source-amend", "wordSeq": 5, "fixParity": true,
+     "reason": "地面站重传确认 seq5 奇偶位，局部源数据改动"},
+    {"type": "conflicting-decisions", "branch": "br-baseline", "target": "br-baseline-A-s0-c0",
+     "first": {"action": "accept", "by": "审阅者甲"}, "second": {"action": "reject", "by": "审阅者乙"},
+     "note": "互相冲突的人工决定：同一 baseVersion 上先接受后拒绝"}
+  ]
+}
