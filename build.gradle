@@ -1,0 +1,51 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'com.avionics'
+version = '1.0.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'io.javalin:javalin:6.5.0'
+    implementation 'org.xerial:sqlite-jdbc:3.47.1.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.2'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.18.2'
+    implementation 'org.slf4j:slf4j-simple:2.0.16'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.3'
+    testImplementation 'com.microsoft.playwright:playwright:1.49.0'
+}
+
+application {
+    mainClass = 'com.avionics.a429.Main'
+}
+
+test {
+    useJUnitPlatform {
+        excludeTags 'e2e'
+    }
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+    }
+}
+
+tasks.register('testE2e', Test) {
+    useJUnitPlatform {
+        includeTags 'e2e'
+    }
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+    }
+    systemProperty 'a429.e2e.port',
+        System.getProperty('a429.e2e.port', '5399')
+}
