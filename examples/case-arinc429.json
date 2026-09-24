@@ -1,0 +1,397 @@
+{
+  "caseId": "arinc429-wordpath-evidence-v1",
+  "title": "字路译码台：ARINC 429 标签、奇偶与速率分段证据",
+  "schemaVersion": 1,
+  "createdAt": "2026-09-24T01:00:00Z",
+  "unitBasis": {
+    "altitude": "ft (geometric, channel-independent)",
+    "fuel": "kg (quantity)",
+    "angle": "deg (geometric)",
+    "rateHigh": "bit/s",
+    "rateLow": "bit/s",
+    "time": "microseconds since 2026-09-24T01:10:00Z"
+  },
+  "channels": [
+    {
+      "id": "CH-A",
+      "name": "Avionics Bus A",
+      "nominalRateBps": 100000,
+      "wordBits": 32
+    },
+    {
+      "id": "CH-B",
+      "name": "Avionics Bus B",
+      "nominalRateBps": 12500,
+      "wordBits": 32
+    }
+  ],
+  "dictionaries": [
+    {
+      "id": "dict-v1",
+      "labelOctal": "205",
+      "labelInt": 133,
+      "name": "ALTITUDE",
+      "encoding": "BNR",
+      "signed": true,
+      "dataMsb": 28,
+      "dataLsb": 11,
+      "resolution": 0.1,
+      "unit": "ft",
+      "ssmMode": "bnr"
+    },
+    {
+      "id": "dict-v1",
+      "labelOctal": "240",
+      "labelInt": 160,
+      "name": "FUEL_QUANTITY",
+      "encoding": "BCD",
+      "nibbles": [
+        {
+          "name": "d1",
+          "msb": 28,
+          "lsb": 25
+        },
+        {
+          "name": "d2",
+          "msb": 24,
+          "lsb": 21
+        },
+        {
+          "name": "d3",
+          "msb": 20,
+          "lsb": 17
+        },
+        {
+          "name": "d4",
+          "msb": 16,
+          "lsb": 13
+        }
+      ],
+      "signMsb": 12,
+      "signLsb": 12,
+      "resolution": 0.1,
+      "unit": "kg",
+      "ssmMode": "discrete"
+    },
+    {
+      "id": "dict-v1",
+      "labelOctal": "041",
+      "labelInt": 33,
+      "name": "GEAR_DISCRETE",
+      "encoding": "DISCRETE",
+      "bits": [
+        {
+          "arincBit": 11,
+          "name": "gear_down_locked"
+        },
+        {
+          "arincBit": 12,
+          "name": "gear_up_locked"
+        },
+        {
+          "arincBit": 13,
+          "name": "gear_in_transit"
+        },
+        {
+          "arincBit": 14,
+          "name": "gear_fault"
+        }
+      ],
+      "unit": "state",
+      "ssmMode": "discrete"
+    },
+    {
+      "id": "dict-v2",
+      "labelOctal": "041",
+      "labelInt": 33,
+      "name": "FLAP_ANGLE_BNR",
+      "encoding": "BNR",
+      "signed": true,
+      "dataMsb": 28,
+      "dataLsb": 11,
+      "resolution": 0.5,
+      "unit": "deg",
+      "ssmMode": "discrete",
+      "supersedes": "dict-v1#041"
+    }
+  ],
+  "parameters": {
+    "labelRadix": 8,
+    "activeDictionary": "dict-v1",
+    "rateHighBps": 100000,
+    "rateLowBps": 12500,
+    "wordBits": 32,
+    "gapMultiple": 4,
+    "ambiguityLowMaxN": 1,
+    "ambiguityHighMaxN": 10
+  },
+  "batches": [
+    {
+      "id": "batch-2026-09-24",
+      "importedAt": "2026-09-24T01:05:00Z",
+      "source": "bus-capture-2026-09-24",
+      "wordIds": [
+        "raw:CH-A:01",
+        "raw:CH-A:02",
+        "raw:CH-A:03",
+        "raw:CH-A:04",
+        "raw:CH-A:05",
+        "raw:CH-A:06",
+        "raw:CH-A:07",
+        "raw:CH-A:08",
+        "raw:CH-A:09",
+        "raw:CH-A:10",
+        "raw:CH-A:11",
+        "raw:CH-A:12",
+        "raw:CH-B:01",
+        "raw:CH-B:02",
+        "raw:CH-B:03"
+      ]
+    }
+  ],
+  "words": [
+    {
+      "id": "raw:CH-A:01",
+      "seq": 1,
+      "channel": "CH-A",
+      "receivedAt": "2026-09-24T01:10:00.000000Z",
+      "receivedUs": 0,
+      "raw32": 2701346823,
+      "rawHex": "A1034807",
+      "sourceRef": "bus-capture-2026-09-24#CH-A@0"
+    },
+    {
+      "id": "raw:CH-A:02",
+      "seq": 2,
+      "channel": "CH-A",
+      "receivedAt": "2026-09-24T01:10:00.000320Z",
+      "receivedUs": 320,
+      "raw32": 2701182982,
+      "rawHex": "A100C806",
+      "sourceRef": "bus-capture-2026-09-24#CH-A@320"
+    },
+    {
+      "id": "raw:CH-A:03",
+      "seq": 3,
+      "channel": "CH-A",
+      "receivedAt": "2026-09-24T01:10:00.000640Z",
+      "receivedUs": 640,
+      "raw32": 2701314055,
+      "rawHex": "A102C807",
+      "sourceRef": "bus-capture-2026-09-24#CH-A@640"
+    },
+    {
+      "id": "raw:CH-A:04",
+      "seq": 4,
+      "channel": "CH-A",
+      "receivedAt": "2026-09-24T01:10:00.000960Z",
+      "receivedUs": 960,
+      "raw32": 2701248519,
+      "rawHex": "A101C807",
+      "sourceRef": "bus-capture-2026-09-24#CH-A@960"
+    },
+    {
+      "id": "raw:CH-A:05",
+      "seq": 5,
+      "channel": "CH-A",
+      "receivedAt": "2026-09-24T01:10:00.001280Z",
+      "receivedUs": 1280,
+      "raw32": 2701443087,
+      "rawHex": "A104C00F",
+      "sourceRef": "bus-capture-2026-09-24#CH-A@1280"
+    },
+    {
+      "id": "raw:CH-A:06",
+      "seq": 6,
+      "channel": "CH-A",
+      "receivedAt": "2026-09-24T01:10:00.001600Z",
+      "receivedUs": 1600,
+      "raw32": 84601927,
+      "rawHex": "050AEC47",
+      "sourceRef": "bus-capture-2026-09-24#CH-A@1600"
+    },
+    {
+      "id": "raw:CH-A:07",
+      "seq": 7,
+      "channel": "CH-A",
+      "receivedAt": "2026-09-24T01:10:00.001920Z",
+      "receivedUs": 1920,
+      "raw32": 83898375,
+      "rawHex": "05003007",
+      "sourceRef": "bus-capture-2026-09-24#CH-A@1920"
+    },
+    {
+      "id": "raw:CH-A:08",
+      "seq": 8,
+      "channel": "CH-A",
+      "receivedAt": "2026-09-24T01:10:00.002240Z",
+      "receivedUs": 2240,
+      "raw32": 2216689671,
+      "rawHex": "84200007",
+      "sourceRef": "bus-capture-2026-09-24#CH-A@2240"
+    },
+    {
+      "id": "raw:CH-A:09",
+      "seq": 9,
+      "channel": "CH-A",
+      "receivedAt": "2026-09-24T01:10:00.053440Z",
+      "receivedUs": 53440,
+      "raw32": 2701292550,
+      "rawHex": "A1027406",
+      "sourceRef": "bus-capture-2026-09-24#CH-A@53440"
+    },
+    {
+      "id": "raw:CH-A:10",
+      "seq": 10,
+      "channel": "CH-A",
+      "receivedAt": "2026-09-24T01:10:00.056000Z",
+      "receivedUs": 56000,
+      "raw32": 2702160903,
+      "rawHex": "A10FB407",
+      "sourceRef": "bus-capture-2026-09-24#CH-A@56000"
+    },
+    {
+      "id": "raw:CH-A:11",
+      "seq": 11,
+      "channel": "CH-A",
+      "receivedAt": "2026-09-24T01:10:00.137920Z",
+      "receivedUs": 137920,
+      "raw32": 2701505538,
+      "rawHex": "A105B402",
+      "sourceRef": "bus-capture-2026-09-24#CH-A@137920"
+    },
+    {
+      "id": "raw:CH-A:12",
+      "seq": 12,
+      "channel": "CH-A",
+      "receivedAt": "2026-09-24T01:10:00.140480Z",
+      "receivedUs": 140480,
+      "raw32": 2701833223,
+      "rawHex": "A10AB407",
+      "sourceRef": "bus-capture-2026-09-24#CH-A@140480"
+    },
+    {
+      "id": "raw:CH-B:01",
+      "seq": 1,
+      "channel": "CH-B",
+      "receivedAt": "2026-09-24T01:10:00.000000Z",
+      "receivedUs": 0,
+      "raw32": 2216689671,
+      "rawHex": "84200007",
+      "sourceRef": "bus-capture-2026-09-24#CH-B@0"
+    },
+    {
+      "id": "raw:CH-B:02",
+      "seq": 2,
+      "channel": "CH-B",
+      "receivedAt": "2026-09-24T01:10:00.002560Z",
+      "receivedUs": 2560,
+      "raw32": 2216689671,
+      "rawHex": "84200007",
+      "sourceRef": "bus-capture-2026-09-24#CH-B@2560"
+    },
+    {
+      "id": "raw:CH-B:03",
+      "seq": 3,
+      "channel": "CH-B",
+      "receivedAt": "2026-09-24T01:10:00.005120Z",
+      "receivedUs": 5120,
+      "raw32": 2216689671,
+      "rawHex": "84200007",
+      "sourceRef": "bus-capture-2026-09-24#CH-B@5120"
+    }
+  ],
+  "replay": [
+    {
+      "seq": 1,
+      "kind": "IMPORT",
+      "actor": "avionics-data-team",
+      "summary": "导入时间戳、32 位原始字、通道配置与标签字典"
+    },
+    {
+      "seq": 2,
+      "kind": "CHECK",
+      "name": "baseline-preservation",
+      "summary": "原位序列/接收时间/通道/奇偶/label/SDI/SSM/数据域/字典版本全部保留"
+    },
+    {
+      "seq": 3,
+      "kind": "PARAM_REV",
+      "param": "labelRadix",
+      "value": 8,
+      "summary": "label 八进制展示参数确认（不改变底层位）"
+    },
+    {
+      "seq": 4,
+      "kind": "PARAM_REV",
+      "param": "activeDictionary",
+      "value": "dict-v2",
+      "summary": "一次参数修订：041 由 discrete 切换为 BNR flap 角（字典版本决定解释）"
+    },
+    {
+      "seq": 5,
+      "kind": "PARAM_REV",
+      "param": "activeDictionary",
+      "value": "dict-v1",
+      "summary": "回到 dict-v1 依赖版本（旧结论可恢复）"
+    },
+    {
+      "seq": 6,
+      "kind": "DECIDE",
+      "session": "S1",
+      "target": "iv:CH-A:09-10",
+      "candidate": "LOW",
+      "action": "ACCEPT",
+      "summary": "窗口 S1 接受歧义区间的 LOW 连续候选"
+    },
+    {
+      "seq": 7,
+      "kind": "DECIDE",
+      "session": "S2",
+      "baseHead": 5,
+      "conflictWith": 6,
+      "target": "iv:CH-A:09-10",
+      "candidate": "GAP",
+      "action": "ACCEPT",
+      "expectConflict": true,
+      "summary": "窗口 S2 基于旧版本后提交 GAP 候选，必须看到版本冲突与双方差异"
+    },
+    {
+      "seq": 8,
+      "kind": "REVERT",
+      "revertSeq": 6,
+      "summary": "撤销 S1 的接受，恢复 CANDIDATE 多候选分支"
+    },
+    {
+      "seq": 9,
+      "kind": "BRANCH_SOURCE",
+      "branch": "cb-bitrev",
+      "sourceKind": "BIT_REVERSE",
+      "wordId": "raw:CH-A:01",
+      "summary": "反例：位序反转（label/数据/SSM 全部换位，仅影响该字）"
+    },
+    {
+      "seq": 10,
+      "kind": "BRANCH_SOURCE",
+      "branch": "cb-parity",
+      "sourceKind": "PARITY_ERROR",
+      "wordId": "raw:CH-A:02",
+      "summary": "反例：奇偶错误（坏奇偶字不进入聚合值）"
+    },
+    {
+      "seq": 11,
+      "kind": "BRANCH_SOURCE",
+      "branch": "cb-rateswitch",
+      "sourceKind": "RATE_SWITCH",
+      "wordId": "raw:CH-A:08",
+      "newReceivedUs": 4480,
+      "summary": "反例：速率切换（只影响相邻区间与速率分段候选）"
+    },
+    {
+      "seq": 12,
+      "kind": "CHECK",
+      "name": "counterexample-scope",
+      "summary": "断言每个反例的失效范围被限制在正确对象"
+    }
+  ]
+}
