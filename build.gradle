@@ -1,0 +1,60 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'a429'
+version = '1.0.0'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'io.javalin:javalin:6.7.0'
+    implementation 'org.slf4j:slf4j-simple:2.0.17'
+    implementation 'org.xerial:sqlite-jdbc:3.47.2.0'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'
+    testImplementation 'com.microsoft.playwright:playwright:1.51.0'
+}
+
+application {
+    mainClass = 'a429.Main'
+}
+
+// 离线案例包目录同时作为运行期资源（只读示例）
+sourceSets {
+    main {
+        resources {
+            srcDir layout.projectDirectory.dir('cases')
+        }
+    }
+}
+
+tasks.named('processResources') {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+    // Playwright 驱动与浏览器缓存位于用户目录，保持宿主环境可见
+    environment 'PLAYWRIGHT_BROWSERS_PATH', System.getProperty('user.home') + '/Library/Caches/ms-playwright'
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+        showStandardStreams = false
+    }
+}
+
+tasks.register('generateCase', JavaExec) {
+    description = '重新生成 cases/ 下的离线 ARINC 429 案例包'
+    group = 'application'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'a429.tools.GenerateCase'
+}
