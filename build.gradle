@@ -1,0 +1,49 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'avionics.a429'
+version = '1.0.0'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'io.javalin:javalin:7.2.3'
+    implementation 'org.xerial:sqlite-jdbc:3.53.4.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.22.3'
+    implementation 'org.slf4j:slf4j-simple:2.0.17'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.13.4'
+    testImplementation 'org.seleniumhq.selenium:selenium-java:4.49.0'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+application {
+    mainClass = 'avionics.a429.Main'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+        exceptionFormat = 'full'
+    }
+}
+
+// 仓库自带的离线案例包一并进入 classpath，便于 jar/测试读取
+sourceSets {
+    main {
+        resources {
+            srcDir 'casepacks'
+        }
+    }
+}
